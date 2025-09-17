@@ -105,7 +105,7 @@ Create a `.env.local` file for environment variables:
 
 ```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-# Add other environment variables as needed
+RESEND_API_KEY=your_resend_api_key
 ```
 
 ### Meeting Scheduler URLs
