@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -138,6 +140,7 @@ export function PricingSection() {
                 <div className="mt-auto pt-4">
                   <Button
                     className={`w-full ${pkg.popular ? "bg-accent text-accent-foreground hover:bg-accent/90" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
+                    onClick={() => window.open("https://forms.fillout.com/t/gCgw6zuqbKus", "_blank")}
                   >
                     {pkg.cta}
                   </Button>
@@ -151,7 +154,11 @@ export function PricingSection() {
           <p className="text-muted-foreground mb-4">
             Need a custom solution? We create tailored packages for enterprise clients.
           </p>
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => window.open("https://forms.fillout.com/t/gCgw6zuqbKus", "_blank")}
+          >
             Contact for Custom Quote
           </Button>
         </div>

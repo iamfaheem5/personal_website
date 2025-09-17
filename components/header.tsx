@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -40,12 +41,7 @@ export function Header() {
           <div className="hidden md:block">
             <Button 
               className="bg-accent text-accent-foreground hover:bg-accent/90"
-              onClick={() => {
-                const element = document.getElementById('calendly-container');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              onClick={() => window.open("https://mapfix.fillout.com/meet-us", "_blank")}
             >
               Get Free Consultation
             </Button>
@@ -76,7 +72,10 @@ export function Header() {
               <a href="#contact" className="text-foreground hover:text-accent transition-colors">
                 Contact
               </a>
-              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 w-full">
+              <Button 
+                className="bg-accent text-accent-foreground hover:bg-accent/90 w-full"
+                onClick={() => window.open("https://mapfix.fillout.com/meet-us", "_blank")}
+              >
                 Get Free Consultation
               </Button>
             </div>
