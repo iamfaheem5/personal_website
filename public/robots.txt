@@ -1,0 +1,23 @@
+# robots.txt for MapFixIn Agency LLM Website
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow crawling of private or sensitive areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /user/
+
+# Disallow crawling of LLM-specific endpoints
+Disallow: /api/chat/
+Disallow: /api/completion/
+Disallow: /api/embedding/
+Disallow: /api/generate/
+
+# Crawl delay to prevent overloading the server
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
