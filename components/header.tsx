@@ -21,27 +21,27 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-foreground hover:text-accent transition-colors">
+            <a href="/#home" className="text-foreground hover:text-accent transition-colors">
               Home
             </a>
-            <a href="#services" className="text-foreground hover:text-accent transition-colors">
+            <a href="/#services" className="text-foreground hover:text-accent transition-colors">
               Services
             </a>
             <a href="/blog" className="text-foreground hover:text-accent transition-colors">
               Blog
             </a>
-            <a href="#pricing" className="text-foreground hover:text-accent transition-colors">
+            <a href="/#pricing" className="text-foreground hover:text-accent transition-colors">
               Pricing
             </a>
-            <a href="#testimonials" className="text-foreground hover:text-accent transition-colors">
+            <a href="/#testimonials" className="text-foreground hover:text-accent transition-colors">
               Reviews
             </a>
-            <a href="#contact" className="text-foreground hover:text-accent transition-colors">
+            <a href="/#contact" className="text-foreground hover:text-accent transition-colors">
               Contact
             </a>
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-4">
             <Button 
               className="bg-accent text-accent-foreground hover:bg-accent/90"
               onClick={() => window.open("https://mapfix.fillout.com/meet-us", "_blank")}
@@ -60,22 +60,22 @@ export function Header() {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-border pt-4">
             <div className="flex flex-col space-y-4">
-              <a href="#home" className="text-foreground hover:text-accent transition-colors">
+              <a href="/#home" className="text-foreground hover:text-accent transition-colors">
                 Home
               </a>
-              <a href="#services" className="text-foreground hover:text-accent transition-colors">
+              <a href="/#services" className="text-foreground hover:text-accent transition-colors">
                 Services
               </a>
               <a href="/blog" className="text-foreground hover:text-accent transition-colors">
                 Blog
               </a>
-              <a href="#pricing" className="text-foreground hover:text-accent transition-colors">
+              <a href="/#pricing" className="text-foreground hover:text-accent transition-colors">
                 Pricing
               </a>
-              <a href="#testimonials" className="text-foreground hover:text-accent transition-colors">
+              <a href="/#testimonials" className="text-foreground hover:text-accent transition-colors">
                 Reviews
               </a>
-              <a href="#contact" className="text-foreground hover:text-accent transition-colors">
+              <a href="/#contact" className="text-foreground hover:text-accent transition-colors">
                 Contact
               </a>
               <Button 

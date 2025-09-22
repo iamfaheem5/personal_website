@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { compileMDX } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
+import React from 'react';
 
 // Define the path to the posts directory
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -16,7 +16,7 @@ type Post = {
     excerpt?: string;
     tags?: string[];
   };
-  mdxSource: MDXRemoteSerializeResult;
+  mdxSource: React.ReactNode;
 };
 
 // Generate static params for each post
@@ -31,50 +31,53 @@ export async function generateStaticParams() {
 }
 
 // Get post data by slug
-export async function getPostData(slug: string) {
+export async function getPostData(slug: string): Promise<Post> {
   const filePath = path.join(postsDirectory, `${slug}.mdx`);
-  const fileContents = await fs.readFile(filePath, 'utf8');
-  const { data, content } = matter(fileContents);
+  try {
+    const fileContents = await fs.readFile(filePath, 'utf8');
+    const { data, content } = matter(fileContents);
 
-  import('next-mdx-remote/rsc').then((mdxRemote) => {
-    // The MDXRemote will handle the serialization
-  });
-
-  return {
-    frontmatter: {
-      ...data,
-      date: data.date ? new Date(data.date) : new Date(),
-    },
-    mdxSource: {
-      compiledSource: '', // For RSC, we compile in the component
-      scope: {},
+    const { content: mdxSource } = await compileMDX({
+      source: content,
       options: {
         mdxOptions: {
           rehypePlugins: [],
           remarkPlugins: [],
         },
       },
-    },
-    content,
-  } as { frontmatter: any; mdxSource: MDXRemoteSerializeResult; content: string };
+    });
+
+    return {
+      frontmatter: {
+        ...data,
+        date: data.date ? new Date(data.date) : new Date(),
+      },
+      mdxSource,
+    };
+  } catch (error) {
+    console.error('Error reading post for slug', slug, ':', error);
+    return null as any;
+  }
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content } = await getPostData(params.slug);
+  const post = await getPostData(params.slug);
 
-  if (!frontmatter) {
+  if (!post) {
     notFound();
   }
 
+  const { frontmatter, mdxSource } = post;
+
   return (
-    <article className="container max-w-3xl mx-auto px-4 py-12 prose dark:prose-invert">
+    <article className="container max-w-4xl mx-auto px-6 py-16 prose prose-lg dark:prose-invert">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+        <h1 className="text-5xl font-bold mb-4">{frontmatter.title}</h1>
         <time className="text-sm text-muted-foreground">
           {format(frontmatter.date as Date, 'MMMM dd, yyyy')}
         </time>
         {frontmatter.tags && (
-          <ul className="flex flex-wrap gap-2 mt-4">
+          <ul className="flex flex-wrap gap-3 mt-4">
             {frontmatter.tags.map((tag: string) => (
               <li key={tag} className="text-sm bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">
                 {tag}
@@ -83,7 +86,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
           </ul>
         )}
       </header>
-      <MDXRemote source={content} />
+      {mdxSource}
     </article>
   );
 }
