@@ -27,6 +27,9 @@ export function Header() {
             <a href="#services" className="text-foreground hover:text-accent transition-colors">
               Services
             </a>
+            <a href="/blog" className="text-foreground hover:text-accent transition-colors">
+              Blog
+            </a>
             <a href="#pricing" className="text-foreground hover:text-accent transition-colors">
               Pricing
             </a>
@@ -62,6 +65,9 @@ export function Header() {
               </a>
               <a href="#services" className="text-foreground hover:text-accent transition-colors">
                 Services
+              </a>
+              <a href="/blog" className="text-foreground hover:text-accent transition-colors">
+                Blog
               </a>
               <a href="#pricing" className="text-foreground hover:text-accent transition-colors">
                 Pricing

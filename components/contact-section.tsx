@@ -6,11 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, X } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // Form validation schema
 const formSchema = z.object({
@@ -84,18 +84,22 @@ export function ContactSection() {
             </CardHeader>
             <CardContent className="space-y-4">
               {submitStatus && (
-                <Alert className={submitStatus.success ? "bg-green-50 border-green-200 text-green-800" : "bg-red-50 border-red-200 text-red-800"}>
-                  <div className="flex items-center gap-2">
-                    {submitStatus.success ? (
-                      <CheckCircle className="h-4 w-4 text-green-600" />
-                    ) : (
-                      <AlertCircle className="h-4 w-4 text-red-600" />
-                    )}
-                    <AlertDescription>{submitStatus.message}</AlertDescription>
+                <Alert className={`${submitStatus.success ? "border-none ring-1 ring-emerald-400/40 bg-gradient-to-r from-emerald-50 to-emerald-100/70 text-emerald-900 dark:from-emerald-950/40 dark:to-emerald-900/30 dark:text-emerald-50 ring-emerald-500/20" : "border-none ring-1 ring-red-400/40 bg-gradient-to-r from-red-50 to-red-100/70 text-red-900 dark:from-red-950/40 dark:to-red-900/30 dark:text-red-50 ring-red-500/20"} rounded-xl shadow-lg animate-in fade-in-50 slide-in-from-top-2 duration-300`}>
+                  <CheckCircle className={`h-5 w-5 flex-shrink-0 ${submitStatus.success ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`} />
+                  <div className="ml-3">
+                    <AlertTitle className={`font-semibold ${submitStatus.success ? "text-emerald-900 dark:text-emerald-50" : "text-red-900 dark:text-red-50"}`}>{submitStatus.success ? "Message Sent!" : "Oops! Something went wrong."}</AlertTitle>
+                    <AlertDescription className={`text-sm ${submitStatus.success ? "text-emerald-800 dark:text-emerald-200" : "text-red-800 dark:text-red-200"}`}>{submitStatus.message}</AlertDescription>
                   </div>
+                  <button
+                    onClick={() => setSubmitStatus(null)}
+                    className="ml-auto h-7 w-7 rounded-md p-1 hover:bg-background/50 transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Dismiss</span>
+                  </button>
                 </Alert>
               )}
-              
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
