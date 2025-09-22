@@ -14,7 +14,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <ServicesSection />
-        <StatsSection />
+        <div className="hidden md:block"><StatsSection /></div>
         <PricingSection />
         <TestimonialsSection />
         <ContactSection />

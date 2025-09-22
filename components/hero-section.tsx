@@ -21,13 +21,17 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              Start Growing Today
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button size="lg" variant="outline">
-              View Our Work
-            </Button>
+            <a
+              href="https://forms.fillout.com/t/gCgw6zuqbKus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
+                Start Growing Today
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </a>
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
